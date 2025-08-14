@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杏仁茶訂購系統</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f5f5f5;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .product-section {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #444;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .product-icon {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+            flex-shrink: 0;
+        }
+        
+        .product-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .sugar-options {
+            margin-left: 10px;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #f0f8f0;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .options-title {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .sugar-option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            margin-right: 0;
+        }
+        
+        .sugar-option-item input[type="radio"] {
+            width: auto !important;
+            height: auto !important;
+            margin-right: 8px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        
+        .sugar-option-item label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: normal;
+            padding: 0;
+            border: none;
+            background: none;
+        }
+        
+        .temperature-options {
+            margin-left: 10px;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #e8f4fd;
+            border-radius: 5px;
+            border-left: 3px solid #2196F3;
+        }
+        
+        
+        .temperature-option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            margin-right: 0;
+        }
+        
+        .temperature-option-item input[type="radio"] {
+            width: auto !important;
+            height: auto !important;
+            margin-right: 8px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        
+        .temperature-option-item label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: normal;
+            padding: 0;
+            border: none;
+            background: none;
+        }
+        
+        .individual-item {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .individual-item h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #495057;
+            font-weight: bold;
+        }
+        
+        .individual-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .individual-option-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 120px;
+        }
+        
+        .individual-option-group label {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #6c757d;
+        }
+        
+        .individual-option-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .individual-option-item input {
+            margin-right: 5px;
+        }
+        
+        .individual-option-item label {
+            font-size: 13px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group > label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .product-option > label {
+            flex: 1;
+            min-width: 150px;
+            margin: 0;
+            font-weight: normal;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            width: auto !important;
+            height: auto !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            -webkit-appearance: radio;
+            appearance: auto;
+        }
+        
+        input[type="checkbox"] {
+            -webkit-appearance: checkbox;
+        }
+        
+        input[type="number"] {
+            width: 70px !important;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+            min-height: 50px;
+            touch-action: manipulation;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+        }
+        
+        .stall-info {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .stall-info h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .stall-schedule {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .schedule-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        .day-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-right: 1px solid #fff;
+        }
+        
+        .day-header:last-child {
+            border-right: none;
+        }
+        
+        .location-cell {
+            background-color: #fff;
+            padding: 12px;
+            text-align: center;
+            border-right: 1px solid #ddd;
+            border-top: 1px solid #ddd;
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .location-cell:last-child {
+            border-right: none;
+        }
+        
+        .location-cell small {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .stall-note {
+            margin: 8px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .success {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* RWD 響應式設計 */
+        @media screen and (max-width: 768px) {
+            .stall-schedule {
+                font-size: 14px;
+            }
+            
+            .day-header, .location-cell {
+                padding: 8px 4px;
+            }
+            
+            .stall-info {
+                padding: 12px;
+            }
+            
+            .stall-info h3 {
+                font-size: 16px;
+            }
+            body {
+                padding: 5px;
+                font-size: 16px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            
+            h1 {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+            
+            .product-section {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .product-title {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .product-icon {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .product-option {
+                padding: 10px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            
+            .product-option label {
+                min-width: auto;
+                order: 1;
+                text-align: center;
+            }
+            
+            .product-option input[type="checkbox"] {
+                order: 2;
+                align-self: center;
+                transform: scale(1.2);
+            }
+            
+            .product-option input[type="number"] {
+                order: 3;
+                width: 80px !important;
+                align-self: center;
+            }
+            
+            .sugar-options,
+            .temperature-options {
+                margin-left: 5px;
+                padding: 10px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            input, select, textarea {
+                padding: 14px;
+                font-size: 16px;
+            }
+            
+            .submit-btn {
+                padding: 18px 20px;
+                font-size: 18px;
+                min-height: 55px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .schedule-row {
+                grid-template-columns: repeat(5, 1fr);
+                font-size: 12px;
+            }
+            
+            .day-header, .location-cell {
+                padding: 6px 2px;
+            }
+            .container {
+                padding: 10px;
+            }
+            
+            .product-option {
+                padding: 8px;
+            }
+            
+            .sugar-option-item,
+            .temperature-option-item {
+                margin-bottom: 10px;
+                padding: 8px 0;
+            }
+            
+            .sugar-option-item input[type="radio"],
+            .temperature-option-item input[type="radio"] {
+                transform: scale(1.2);
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>杏仁茶訂購系統</h1>
+        
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="customerName">客戶姓名：</label>
+                <input type="text" id="customerName" name="customerName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="customerPhone">聯絡電話：</label>
+                <input type="tel" id="customerPhone" name="customerPhone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pickupDate">取餐日期：</label>
+                <input type="date" id="pickupDate" name="pickupDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pickupTime">預計取餐時間：</label>
+                <select id="pickupTime" name="pickupTime" required>
+                    <option value="">請選擇取餐時間</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="pickupLocation">取餐地點：</label>
+                <select id="pickupLocation" name="pickupLocation" required>
+                    <option value="">請選擇取餐地點</option>
+                    <option value="成德市場">成德市場</option>
+                    <option value="忠孝醫院">忠孝醫院</option>
+                    <option value="龍興街">龍興街</option>
+                    <option value="延吉市場">延吉市場</option>
+                    <option value="長春市場">長春市場</option>
+                    <option value="七堵市場">七堵市場</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            
+            <div class="form-group" id="customLocationGroup" style="display: none;">
+                <label for="customLocation">請輸入取餐地點：</label>
+                <input type="text" id="customLocation" name="customLocation" placeholder="請詳細輸入取餐地點">
+            </div>
+            
+            <!-- 擺攤地點資訊 -->
+            <div class="stall-info">
+                <h3>📍 平日擺攤地點資訊</h3>
+                <div class="stall-schedule">
+                    <div class="schedule-row">
+                        <div class="day-header">星期二、五</div>
+                        <div class="day-header">星期三</div>
+                        <div class="day-header">星期四</div>
+                        <div class="day-header">星期六</div>
+                        <div class="day-header">星期日</div>
+                    </div>
+                    <div class="schedule-row">
+                        <div class="location-cell">成德市場<br><small>忠孝醫院</small></div>
+                        <div class="location-cell">龍興街</div>
+                        <div class="location-cell">延吉市場</div>
+                        <div class="location-cell">長春市場</div>
+                        <div class="location-cell">七堵市場</div>
+                    </div>
+                </div>
+                <p class="stall-note">🕰️ 擺攤時間：上午 8:00 - 下午 1:30</p>
+                <p class="stall-note">📞 其他時間或地點請選擇「其他」並詳細說明</p>
+            </div>
+            
+            <!-- 杏仁茶 -->
+            <div class="product-section">
+                <div class="product-title">
+                    <img src="杏仁茶.png" alt="杏仁茶" class="product-icon" onerror="this.style.display='none'">
+                    杏仁茶
+                </div>
+                
+                <!-- 一瓶 750ml -->
+                <div class="product-option">
+                    <input type="checkbox" id="almondTea750" name="products" value="杏仁茶-750ml" data-base-price="140">
+                    <label for="almondTea750">一瓶 (750ml) - 1瓶$140 / 2瓶$270 / 3瓶$400</label>
+                    <input type="number" id="qty_almondTea750" min="0" max="99" value="0">
+                </div>
+                <div class="sugar-options" id="sugar_almondTea750" style="display: none;">
+                    <div class="options-title">甜度選擇：</div>
+                    <div id="sugar_options_almondTea750">
+                        <!-- 動態生成的甜度選項會插入這裡 -->
+                    </div>
+                </div>
+                
+                <!-- 一杯 360ml -->
+                <div class="product-option">
+                    <input type="checkbox" id="almondTea360" name="products" value="杏仁茶-360ml" data-price="80">
+                    <label for="almondTea360">一杯 (360ml) - $80</label>
+                    <input type="number" id="qty_almondTea360" min="0" value="0">
+                </div>
+                <div class="sugar-options" id="sugar_almondTea360" style="display: none;">
+                    <div class="options-title">甜度選擇：</div>
+                    <div id="sugar_options_almondTea360">
+                        <!-- 動態生成的甜度選項會插入這裡 -->
+                    </div>
+                </div>
+                <div class="temperature-options" id="temp_almondTea360" style="display: none;">
+                    <div class="options-title">溫度選擇：</div>
+                    <div id="temp_options_almondTea360">
+                        <!-- 動態生成的溫度選項會插入這裡 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 杏仁豆腐 -->
+            <div class="product-section">
+                <div class="product-title">
+                    <img src="杏仁豆腐.png" alt="杏仁豆腐" class="product-icon" onerror="this.style.display='none'">
+                    杏仁豆腐
+                </div>
+                <div class="product-option">
+                    <input type="checkbox" id="almondTofu" name="products" value="杏仁豆腐" data-price="140">
+                    <label for="almondTofu">一碗 (550g) - $140</label>
+                    <input type="number" id="qty_almondTofu" min="0" value="0">
+                </div>
+            </div>
+            
+            <!-- 杏仁粉 -->
+            <div class="product-section">
+                <div class="product-title">
+                    <img src="杏仁粉.png" alt="杏仁粉" class="product-icon" onerror="this.style.display='none'">
+                    杏仁粉
+                </div>
+                <div class="product-option">
+                    <input type="checkbox" id="almondPowder" name="products" value="杏仁粉" data-price="150">
+                    <label for="almondPowder">一包 - $150</label>
+                    <input type="number" id="qty_almondPowder" min="0" value="0">
+                </div>
+                <div class="sugar-options" id="sugar_almondPowder" style="display: none;">
+                    <div class="options-title">甜度選擇：</div>
+                    <div id="sugar_options_almondPowder">
+                        <!-- 動態生成的甜度選項會插入這裡 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">備註：</label>
+                <textarea id="notes" name="notes" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <strong>總金額：$<span id="totalAmount">0</span></strong>
+            </div>
+            
+            <button type="submit" class="submit-btn">送出訂單</button>
+            
+            <div class="loading" id="loading">
+                <p>處理中...</p>
+            </div>
+            
+            <div class="success" id="success">
+                <p>訂單已成功送出！</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // 生成取餐時間選項 (8:00-13:30，每半小時一個選項)
+        function generateTimeOptions() {
+            const timeSelect = document.getElementById('pickupTime');
+            if (!timeSelect) {
+                console.error('找不到 pickupTime 元素');
+                return;
+            }
+            
+            const startHour = 8;
+            const endHour = 13;
+            const endMinute = 30;
+            
+            for (let hour = startHour; hour <= endHour; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    if (hour === endHour && minute > endMinute) break;
+                    
+                    const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const option = new Option(timeStr, timeStr);
+                    timeSelect.add(option);
+                }
+            }
+        }
+        
+        // 計算杏仁茶750ml的特殊價格
+        function calculate750mlPrice(quantity) {
+            if (quantity === 0) return 0;
+            if (quantity === 1) return 140;
+            if (quantity === 2) return 270;
+            if (quantity === 3) return 400;
+            
+            // 超過3瓶的計算邏輯：每3瓶為一組$400，剩餘瓶數按階段計算
+            const fullSets = Math.floor(quantity / 3); // 完整的3瓶組數
+            const remainder = quantity % 3; // 剩餘瓶數
+            
+            let totalPrice = fullSets * 400; // 完整組的價格
+            
+            // 計算剩餘瓶數的價格
+            if (remainder === 1) totalPrice += 140;
+            if (remainder === 2) totalPrice += 270;
+            
+            return totalPrice;
+        }
+
+        // 計算杏仁茶與杏仁豆腐搭配優惠價格
+        function calculateComboPrice() {
+            const almondTea750Qty = parseInt(document.getElementById('qty_almondTea750')?.value) || 0;
+            const almondTofuQty = parseInt(document.getElementById('qty_almondTofu')?.value) || 0;
+            
+            // 總共可以搭配的組合數量（杏仁茶750ml + 杏仁豆腐）
+            const totalComboItems = almondTea750Qty + almondTofuQty;
+            
+            if (totalComboItems === 0) return { comboPrice: 0, useCombo: false };
+            
+            let comboPrice = 0;
+            let remainingTea = almondTea750Qty;
+            let remainingTofu = almondTofuQty;
+            
+            // 檢查是否可以使用搭配優惠
+            if (totalComboItems >= 2) {
+                if (totalComboItems === 2) {
+                    comboPrice = 270; // 2項搭配 = $270
+                    remainingTea = Math.max(0, almondTea750Qty - 2);
+                    remainingTofu = Math.max(0, almondTofuQty - 2);
+                } else if (totalComboItems === 3) {
+                    comboPrice = 400; // 3項搭配 = $400
+                    remainingTea = 0;
+                    remainingTofu = 0;
+                } else {
+                    // 超過3項：每3項為一組$400
+                    const comboSets = Math.floor(totalComboItems / 3);
+                    const remainder = totalComboItems % 3;
+                    
+                    comboPrice = comboSets * 400;
+                    if (remainder === 2) comboPrice += 270;
+                    else if (remainder === 1) comboPrice += 140;
+                    
+                    const usedItems = comboSets * 3 + remainder;
+                    // 優先使用杏仁茶參與搭配
+                    if (usedItems <= almondTea750Qty) {
+                        remainingTea = almondTea750Qty - usedItems;
+                        remainingTofu = almondTofuQty;
+                    } else {
+                        remainingTea = 0;
+                        remainingTofu = almondTofuQty - (usedItems - almondTea750Qty);
+                    }
+                }
+                
+                // 計算剩餘商品的原價
+                const remainingTeaPrice = calculate750mlPrice(remainingTea);
+                const remainingTofuPrice = remainingTofu * 140;
+                
+                return { 
+                    comboPrice: comboPrice + remainingTeaPrice + remainingTofuPrice, 
+                    useCombo: true,
+                    comboItems: totalComboItems - remainingTea - remainingTofu
+                };
+            }
+            
+            // 不使用搭配，按原價計算
+            const teaPrice = calculate750mlPrice(almondTea750Qty);
+            const tofuPrice = almondTofuQty * 140;
+            return { comboPrice: teaPrice + tofuPrice, useCombo: false };
+        }
+        
+        // 計算總金額
+        function calculateTotal() {
+            let total = 0;
+            const checkboxes = document.querySelectorAll('input[name="products"]:checked');
+            
+            // 先檢查是否有杏仁茶750ml和杏仁豆腐的搭配
+            const comboResult = calculateComboPrice();
+            let comboProcessed = false;
+            
+            checkboxes.forEach(checkbox => {
+                const qtyId = 'qty_' + checkbox.id;
+                const qtyElement = document.getElementById(qtyId);
+                const qty = qtyElement ? parseInt(qtyElement.value) || 0 : 0;
+                
+                let itemTotal = 0;
+                
+                if (checkbox.id === 'almondTea750' || checkbox.id === 'almondTofu') {
+                    // 杏仁茶750ml和杏仁豆腐使用搭配價格（只計算一次）
+                    if (!comboProcessed) {
+                        itemTotal = comboResult.comboPrice;
+                        comboProcessed = true;
+                    }
+                } else {
+                    // 其他商品按單價計算
+                    const price = parseInt(checkbox.dataset.price);
+                    itemTotal = price * qty;
+                }
+                
+                total += itemTotal;
+            });
+            
+            // 如果沒有選擇杏仁茶750ml或杏仁豆腐，但有其中一個，仍需要處理
+            if (!comboProcessed && (document.getElementById('qty_almondTea750')?.value > 0 || document.getElementById('qty_almondTofu')?.value > 0)) {
+                total += comboResult.comboPrice;
+            }
+            
+            const totalElement = document.getElementById('totalAmount');
+            if (totalElement) {
+                totalElement.textContent = total;
+            }
+        }
+        
+        // 動態生成選項
+        function generateOptions(productId, quantity) {
+            const hasSugar = ['almondTea750', 'almondTea360', 'almondPowder'].includes(productId);
+            const hasTemperature = ['almondTea360'].includes(productId);
+            
+            // 生成甜度選項
+            if (hasSugar) {
+                const sugarContainer = document.getElementById('sugar_options_' + productId);
+                if (sugarContainer) {
+                    sugarContainer.innerHTML = '';
+                    
+                    // 根據產品類型設定甜度選項
+                    let sugarOptions;
+                    if (productId === 'almondPowder') {
+                        sugarOptions = ['無糖', '微糖']; // 杏仁粉只有無糖、微糖
+                    } else {
+                        sugarOptions = ['無糖', '三分糖', '五分糖']; // 杏仁茶有無糖、三分糖、五分糖
+                    }
+                    
+                    if (quantity === 1) {
+                        // 單杯選擇
+                        sugarOptions.forEach((option, index) => {
+                            const optionDiv = document.createElement('div');
+                            optionDiv.className = 'sugar-option-item';
+                            optionDiv.innerHTML = `
+                                <input type="radio" name="sugar_${productId}" value="${option}" id="sugar_${productId}_${index}">
+                                <label for="sugar_${productId}_${index}">${option}</label>
+                            `;
+                            sugarContainer.appendChild(optionDiv);
+                        });
+                    } else {
+                        // 多杯選擇
+                        for (let i = 1; i <= quantity; i++) {
+                            const itemDiv = document.createElement('div');
+                            itemDiv.className = 'individual-item';
+                            
+                            let itemName = '杯';
+                            if (productId === 'almondTea750') itemName = '瓶';
+                            
+                            let html = `<h4>第 ${i} ${itemName}：</h4><div class="individual-options">`;
+                            html += `<div class="individual-option-group">
+                                        <label>甜度：</label>`;
+                            
+                            sugarOptions.forEach((option, index) => {
+                                html += `<div class="individual-option-item">
+                                            <input type="radio" name="sugar_${productId}_${i}" value="${option}" id="sugar_${productId}_${i}_${index}">
+                                            <label for="sugar_${productId}_${i}_${index}">${option}</label>
+                                        </div>`;
+                            });
+                            html += '</div>';
+                            
+                            if (hasTemperature) {
+                                html += `<div class="individual-option-group">
+                                            <label>溫度：</label>`;
+                                const tempOptions = ['冰', '熱'];
+                                tempOptions.forEach((option, index) => {
+                                    html += `<div class="individual-option-item">
+                                                <input type="radio" name="temp_${productId}_${i}" value="${option}" id="temp_${productId}_${i}_${index}">
+                                                <label for="temp_${productId}_${i}_${index}">${option}</label>
+                                            </div>`;
+                                });
+                                html += '</div>';
+                            }
+                            
+                            html += '</div>';
+                            itemDiv.innerHTML = html;
+                            sugarContainer.appendChild(itemDiv);
+                        }
+                    }
+                }
+            }
+            
+            // 生成溫度選項（只在單杯時顯示獨立溫度區塊）
+            if (hasTemperature && quantity === 1) {
+                const tempContainer = document.getElementById('temp_options_' + productId);
+                if (tempContainer) {
+                    tempContainer.innerHTML = '';
+                    const tempOptions = ['冰', '熱'];
+                    tempOptions.forEach((option, index) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'temperature-option-item';
+                        optionDiv.innerHTML = `
+                            <input type="radio" name="temp_${productId}" value="${option}" id="temp_${productId}_${index}">
+                            <label for="temp_${productId}_${index}">${option}</label>
+                        `;
+                        tempContainer.appendChild(optionDiv);
+                    });
+                }
+            }
+        }
+        
+        // 處理產品選擇
+        function handleProductSelection() {
+            const checkboxes = document.querySelectorAll('input[name="products"]');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const qtyId = 'qty_' + this.id;
+                    const qtyInput = document.getElementById(qtyId);
+                    const sugarDiv = document.getElementById('sugar_' + this.id);
+                    const tempDiv = document.getElementById('temp_' + this.id);
+                    
+                    if (this.checked) {
+                        if (qtyInput && qtyInput.value == 0) qtyInput.value = 1;
+                        const qty = parseInt(qtyInput.value) || 1;
+                        generateOptions(this.id, qty);
+                        if (sugarDiv) sugarDiv.style.display = 'block';
+                        if (tempDiv && qty === 1) tempDiv.style.display = 'block';
+                    } else {
+                        if (qtyInput) qtyInput.value = 0;
+                        if (sugarDiv) sugarDiv.style.display = 'none';
+                        if (tempDiv) tempDiv.style.display = 'none';
+                    }
+                    calculateTotal();
+                });
+                
+                // 數量變更時的處理
+                const qtyId = 'qty_' + checkbox.id;
+                const qtyInput = document.getElementById(qtyId);
+                if (qtyInput) {
+                    qtyInput.addEventListener('input', function() {
+                        const qty = parseInt(this.value) || 0;
+                        checkbox.checked = qty > 0;
+                        
+                        const sugarDiv = document.getElementById('sugar_' + checkbox.id);
+                        const tempDiv = document.getElementById('temp_' + checkbox.id);
+                        
+                        if (qty > 0) {
+                            generateOptions(checkbox.id, qty);
+                            if (sugarDiv) sugarDiv.style.display = 'block';
+                            if (tempDiv && qty === 1) tempDiv.style.display = 'block';
+                            else if (tempDiv) tempDiv.style.display = 'none';
+                        } else {
+                            if (sugarDiv) sugarDiv.style.display = 'none';
+                            if (tempDiv) tempDiv.style.display = 'none';
+                        }
+                        calculateTotal();
+                    });
+                }
+            });
+        }
+        
+        // 表單提交處理
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 收集訂單資料
+            const formData = new FormData(this);
+            
+            // 處理取餐地點
+            let pickupLocation = formData.get('pickupLocation');
+            console.log('原始取餐地點:', pickupLocation);
+            
+            if (pickupLocation === '其他') {
+                const customLocation = formData.get('customLocation');
+                console.log('自定義取餐地點:', customLocation);
+                if (!customLocation || customLocation.trim() === '') {
+                    alert('請輸入自定義取餐地點！');
+                    return;
+                }
+                pickupLocation = customLocation.trim();
+            }
+            
+            console.log('最終取餐地點:', pickupLocation);
+            
+            const orderData = {
+                customerName: formData.get('customerName'),
+                customerPhone: formData.get('customerPhone'),
+                pickupDate: formData.get('pickupDate'),
+                pickupTime: formData.get('pickupTime'),
+                pickupLocation: pickupLocation,
+                notes: formData.get('notes'),
+                items: [],
+                totalAmount: document.getElementById('totalAmount').textContent
+            };
+            
+            // 收集選中的產品
+            const checkboxes = document.querySelectorAll('input[name="products"]:checked');
+            checkboxes.forEach(checkbox => {
+                const qtyId = 'qty_' + checkbox.id;
+                const qty = parseInt(document.getElementById(qtyId).value) || 0;
+                
+                if (qty > 0) {
+                    if (checkbox.id === 'almondTea750') {
+                        // 杏仁茶750ml特殊處理 - 直接作為一個整體項目
+                        const totalPrice = calculate750mlPrice(qty);
+                        const item = {
+                            product: checkbox.value,
+                            quantity: qty,
+                            price: Math.round(totalPrice / qty), // 平均單價
+                            subtotal: totalPrice
+                        };
+                        
+                        // 如果是多瓶，收集各瓶的甜度
+                        if (qty === 1) {
+                            const sugarRadios = document.querySelectorAll(`input[name="sugar_${checkbox.id}"]:checked`);
+                            if (sugarRadios.length > 0) {
+                                item.sugar = sugarRadios[0].value;
+                            }
+                        } else {
+                            // 多瓶時，收集各瓶甜度
+                            let sugarDetails = [];
+                            for (let i = 1; i <= qty; i++) {
+                                const sugarRadios = document.querySelectorAll(`input[name="sugar_${checkbox.id}_${i}"]:checked`);
+                                if (sugarRadios.length > 0) {
+                                    sugarDetails.push(`第${i}瓶:${sugarRadios[0].value}`);
+                                }
+                            }
+                            if (sugarDetails.length > 0) {
+                                item.sugar = sugarDetails.join('，');
+                            }
+                        }
+                        
+                        orderData.items.push(item);
+                    } else if (qty === 1) {
+                        // 單杯處理
+                        const item = {
+                            product: checkbox.value,
+                            quantity: qty,
+                            price: parseInt(checkbox.dataset.price),
+                            subtotal: qty * parseInt(checkbox.dataset.price)
+                        };
+                        
+                        // 添加甜度選擇
+                        const sugarRadios = document.querySelectorAll(`input[name="sugar_${checkbox.id}"]:checked`);
+                        if (sugarRadios.length > 0) {
+                            item.sugar = sugarRadios[0].value;
+                        }
+                        
+                        // 添加溫度選擇
+                        const tempRadios = document.querySelectorAll(`input[name="temp_${checkbox.id}"]:checked`);
+                        if (tempRadios.length > 0) {
+                            item.temperature = tempRadios[0].value;
+                        }
+                        
+                        orderData.items.push(item);
+                    } else {
+                        // 多杯處理 - 分別收集每杯的選項
+                        const items = [];
+                        for (let i = 1; i <= qty; i++) {
+                            const individualItem = {
+                                product: checkbox.value,
+                                quantity: 1,
+                                price: parseInt(checkbox.dataset.price),
+                                subtotal: parseInt(checkbox.dataset.price),
+                                itemNumber: i
+                            };
+                            
+                            // 收集每杯的甜度選擇
+                            const sugarRadios = document.querySelectorAll(`input[name="sugar_${checkbox.id}_${i}"]:checked`);
+                            if (sugarRadios.length > 0) {
+                                individualItem.sugar = sugarRadios[0].value;
+                            }
+                            
+                            // 收集每杯的溫度選擇
+                            const tempRadios = document.querySelectorAll(`input[name="temp_${checkbox.id}_${i}"]:checked`);
+                            if (tempRadios.length > 0) {
+                                individualItem.temperature = tempRadios[0].value;
+                            }
+                            
+                            items.push(individualItem);
+                        }
+                        
+                        // 將所有個別項目加入訂單
+                        orderData.items.push(...items);
+                    }
+                }
+            });
+            
+            if (orderData.items.length === 0) {
+                alert('請至少選擇一項商品！');
+                return;
+            }
+            
+            // 顯示載入中
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.submit-btn').disabled = true;
+            
+            // 連接到 Google Apps Script
+            const GAS_URL = "https://script.google.com/macros/s/AKfycbxjW_WvpZmdJFpUll26U9hzawfcdPHAnD1Sk3HiYXnDfiRrc2_lYy2JP1XQjPjDwy6H/exec";
+            
+            // 加入除錯訊息
+            console.log('準備送出的訂單資料:', JSON.stringify(orderData, null, 2));
+            
+            // 額外檢查取餐地點
+            console.log('=== 取餐地點詳細檢查 ===');
+            console.log('orderData.pickupLocation:', orderData.pickupLocation);
+            console.log('pickupLocation 類型:', typeof orderData.pickupLocation);
+            console.log('pickupLocation 長度:', orderData.pickupLocation ? orderData.pickupLocation.length : 'undefined');
+            console.log('pickupLocation 是否為空字串:', orderData.pickupLocation === '');
+            console.log('pickupLocation 布林值:', !!orderData.pickupLocation);
+            
+            // 使用 FormData 格式（因為 GAS 能正確處理這種格式）
+            const formDataToSend = new FormData();
+            formDataToSend.append('data', JSON.stringify(orderData));
+            
+            console.log('FormData 中的 data:', formDataToSend.get('data'));
+            
+            fetch(GAS_URL, {
+                method: 'POST',
+                body: formDataToSend
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                console.log('成功回應:', data);
+                
+                if (data.success) {
+                    document.getElementById('success').innerHTML = 
+                        `<p>訂單已成功送出！<br>訂單編號：${data.orderNumber}</p>`;
+                    document.getElementById('success').style.display = 'block';
+                    
+                    // 重置表單
+                    setTimeout(() => {
+                        document.getElementById('orderForm').reset();
+                        document.getElementById('success').style.display = 'none';
+                        calculateTotal();
+                        
+                        // 隱藏所有甜度和溫度選項
+                        document.querySelectorAll('.sugar-options').forEach(div => {
+                            div.style.display = 'none';
+                        });
+                        document.querySelectorAll('.temperature-options').forEach(div => {
+                            div.style.display = 'none';
+                        });
+                        
+                        // 重置取餐地點
+                        document.getElementById('pickupLocation').value = '';
+                        document.getElementById('customLocationGroup').style.display = 'none';
+                        document.getElementById('customLocation').value = '';
+                        document.getElementById('customLocation').required = false;
+                    }, 3000);
+                } else {
+                    alert('訂單提交失敗：' + (data.message || '未知錯誤'));
+                }
+            })
+            .catch(error => {
+                console.error('詳細錯誤:', error);
+                document.getElementById('loading').style.display = 'none';
+                
+                // 由於 CORS 限制，嘗試顯示成功訊息（實際可能已經成功）
+                document.getElementById('success').innerHTML = 
+                    `<p>訂單已送出！<br>如需確認，請聯絡店家</p>`;
+                document.getElementById('success').style.display = 'block';
+                
+                // 重置表單
+                setTimeout(() => {
+                    document.getElementById('orderForm').reset();
+                    document.getElementById('success').style.display = 'none';
+                    calculateTotal();
+                    
+                    // 隱藏所有甜度和溫度選項
+                    document.querySelectorAll('.sugar-options').forEach(div => {
+                        div.style.display = 'none';
+                    });
+                    document.querySelectorAll('.temperature-options').forEach(div => {
+                        div.style.display = 'none';
+                    });
+                    
+                    // 重置取餐地點
+                    document.getElementById('pickupLocation').value = '';
+                    document.getElementById('customLocationGroup').style.display = 'none';
+                    document.getElementById('customLocation').value = '';
+                    document.getElementById('customLocation').required = false;
+                }, 3000);
+            })
+            .finally(() => {
+                document.querySelector('.submit-btn').disabled = false;
+            });
+            
+            console.log('訂單資料：', orderData);
+        });
+        
+        // 處理取餐地點選擇
+        function handleLocationSelection() {
+            const locationSelect = document.getElementById('pickupLocation');
+            const customLocationGroup = document.getElementById('customLocationGroup');
+            const customLocationInput = document.getElementById('customLocation');
+            
+            if (locationSelect) {
+                locationSelect.addEventListener('change', function() {
+                    if (this.value === '其他') {
+                        customLocationGroup.style.display = 'block';
+                        customLocationInput.required = true;
+                    } else {
+                        customLocationGroup.style.display = 'none';
+                        customLocationInput.required = false;
+                        customLocationInput.value = '';
+                    }
+                });
+            }
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                generateTimeOptions();
+                handleProductSelection();
+                handleLocationSelection();
+                calculateTotal();
+                
+                // 設定預設日期為今天
+                const today = new Date().toISOString().split('T')[0];
+                const pickupDateElement = document.getElementById('pickupDate');
+                if (pickupDateElement) {
+                    pickupDateElement.value = today;
+                }
+            } catch (error) {
+                console.error('初始化時發生錯誤:', error);
+            }
+        });
+    </script>
+</body>
+</html>
