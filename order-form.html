@@ -500,6 +500,11 @@
                 </select>
             </div>
             
+            <div class="form-group" id="customTimeGroup" style="display: none;">
+                <label for="customTime">請輸入取餐時間：</label>
+                <input type="time" id="customTime" name="customTime" placeholder="請輸入取餐時間">
+            </div>
+            
             <div class="form-group">
                 <label for="pickupLocation">取餐地點：</label>
                 <select id="pickupLocation" name="pickupLocation" required>
@@ -538,8 +543,9 @@
                         <div class="location-cell">七堵市場</div>
                     </div>
                 </div>
-                <p class="stall-note">🕰️ 擺攤時間：上午 8:00 - 下午 1:30</p>
+                <p class="stall-note">🕰️ 擺攤時間：上午 7:10 - 下午 1:30</p>
                 <p class="stall-note">📞 其他時間或地點請選擇「其他」並詳細說明</p>
+                <p class="stall-note">📞 聯絡電話：0933939261</p>
             </div>
             
             <!-- 杏仁茶 -->
@@ -636,7 +642,7 @@
     </div>
 
     <script>
-        // 生成取餐時間選項 (8:00-13:30，每半小時一個選項)
+        // 生成取餐時間選項 (7:30-13:30，每半小時一個選項)
         function generateTimeOptions() {
             const timeSelect = document.getElementById('pickupTime');
             if (!timeSelect) {
@@ -644,12 +650,14 @@
                 return;
             }
             
-            const startHour = 8;
+            const startHour = 7;
+            const startMinute = 30;
             const endHour = 13;
             const endMinute = 30;
             
             for (let hour = startHour; hour <= endHour; hour++) {
-                for (let minute = 0; minute < 60; minute += 30) {
+                let minuteStart = (hour === startHour) ? startMinute : 0;
+                for (let minute = minuteStart; minute < 60; minute += 30) {
                     if (hour === endHour && minute > endMinute) break;
                     
                     const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
@@ -657,6 +665,10 @@
                     timeSelect.add(option);
                 }
             }
+            
+            // 添加「其他」選項
+            const otherOption = new Option('其他', '其他');
+            timeSelect.add(otherOption);
         }
         
         // 計算杏仁茶750ml的特殊價格
@@ -931,6 +943,22 @@
             // 收集訂單資料
             const formData = new FormData(this);
             
+            // 處理取餐時間
+            let pickupTime = formData.get('pickupTime');
+            console.log('原始取餐時間:', pickupTime);
+            
+            if (pickupTime === '其他') {
+                const customTime = formData.get('customTime');
+                console.log('自定義取餐時間:', customTime);
+                if (!customTime || customTime.trim() === '') {
+                    alert('請輸入自定義取餐時間！');
+                    return;
+                }
+                pickupTime = customTime.trim();
+            }
+            
+            console.log('最終取餐時間:', pickupTime);
+            
             // 處理取餐地點
             let pickupLocation = formData.get('pickupLocation');
             console.log('原始取餐地點:', pickupLocation);
@@ -951,7 +979,7 @@
                 customerName: formData.get('customerName'),
                 customerPhone: formData.get('customerPhone'),
                 pickupDate: formData.get('pickupDate'),
-                pickupTime: formData.get('pickupTime'),
+                pickupTime: pickupTime,
                 pickupLocation: pickupLocation,
                 notes: formData.get('notes'),
                 items: [],
@@ -1118,6 +1146,12 @@
                         document.getElementById('customLocationGroup').style.display = 'none';
                         document.getElementById('customLocation').value = '';
                         document.getElementById('customLocation').required = false;
+                        
+                        // 重置取餐時間
+                        document.getElementById('pickupTime').value = '';
+                        document.getElementById('customTimeGroup').style.display = 'none';
+                        document.getElementById('customTime').value = '';
+                        document.getElementById('customTime').required = false;
                     }, 3000);
                 } else {
                     alert('訂單提交失敗：' + (data.message || '未知錯誤'));
@@ -1180,12 +1214,33 @@
             }
         }
         
+        // 處理取餐時間選擇
+        function handleTimeSelection() {
+            const timeSelect = document.getElementById('pickupTime');
+            const customTimeGroup = document.getElementById('customTimeGroup');
+            const customTimeInput = document.getElementById('customTime');
+            
+            if (timeSelect) {
+                timeSelect.addEventListener('change', function() {
+                    if (this.value === '其他') {
+                        customTimeGroup.style.display = 'block';
+                        customTimeInput.required = true;
+                    } else {
+                        customTimeGroup.style.display = 'none';
+                        customTimeInput.required = false;
+                        customTimeInput.value = '';
+                    }
+                });
+            }
+        }
+        
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 generateTimeOptions();
                 handleProductSelection();
                 handleLocationSelection();
+                handleTimeSelection();
                 calculateTotal();
                 
                 // 設定預設日期為今天
